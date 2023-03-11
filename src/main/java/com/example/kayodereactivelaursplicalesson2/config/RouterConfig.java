@@ -16,6 +16,8 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
  * Created by Kayode.Ogunrinde on 3/11/2023.
  */
 
+// the routes config is for the internal application
+// sort of like a controller to handle incoming requests
 @Configuration
 public class RouterConfig {
 
