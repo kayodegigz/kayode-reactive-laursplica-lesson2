@@ -1,8 +1,10 @@
 package com.example.kayodereactivelaursplicalesson2.config;
 
+import com.example.kayodereactivelaursplicalesson2.handlers.ProductHandler;
 import com.example.kayodereactivelaursplicalesson2.model.Product;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import com.example.kayodereactivelaursplicalesson2.service.ProductService;
@@ -16,16 +18,14 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 
 @Configuration
 public class RouterConfig {
-    private final ProductService productService;
-
-    public RouterConfig(ProductService productService) {
-        this.productService = productService;
-    }
 
     @Bean
-    public RouterFunction<ServerResponse> router() {
+    public RouterFunction<ServerResponse> router(ProductHandler productHandler) {
         return route().
-                GET("/product", req -> ok().body(productService.getAll(), Product.class)).
+                GET(
+                        "/product",
+                        productHandler::getAll
+                ).
                 build();
     }
 }

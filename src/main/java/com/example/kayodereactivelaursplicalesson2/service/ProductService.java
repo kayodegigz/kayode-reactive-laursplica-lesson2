@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
+import java.util.Random;
 import java.util.stream.Stream;
 
 /**
@@ -14,6 +15,7 @@ import java.util.stream.Stream;
 @Service
 public class ProductService {
 
+    Random random = new Random();
     public Flux<Product> getAll() {
         Product p1 = new Product("Beer");
         Product p2 = new Product("Condoms");
@@ -22,6 +24,6 @@ public class ProductService {
 
         return Flux.
                 fromStream(Stream.of(p1, p2, p3, p4)).
-                delayElements(Duration.ofSeconds(5));
+                delayElements(Duration.ofSeconds(random.nextInt(5))); // delay each element at random
     }
 }
